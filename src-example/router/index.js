@@ -7,6 +7,7 @@ import Toast from '@/components/Toast'
 import Calendar from '@/components/calendar'
 import Calendarzijiayou from '@/components/calendarzijiayou'
 import Pullup from '@/components/Pullup'
+import pullupImport from '@/components/pullup-import'
 
 Vue.use(Router)
 const routes = [
@@ -44,6 +45,11 @@ const routes = [
     path: '/Pullup',
     name: 'Pullup',
     component: Pullup
+  },
+  {
+    path: '/pullup-import',
+    name: 'pullupImport',
+    component: pullupImport
   }
 ]
 
