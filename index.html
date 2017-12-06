@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="screen-orientation" content="portrait" />
+  <meta content="yes" name="apple-mobile-web-app-capable">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <script src="https://oic74zs8j.qnssl.com/eruda.min.js"></script>
+  <script>eruda.init()</script>
+  <title>zl饿了么</title>
+  <script>
+    (function() {
+      function e() {
+        r.innerText = "html{font-size:" + (a.style.fontSize = a.getBoundingClientRect().width / o * d + "px") + " !important;}"
+      }
+      var t = navigator.userAgent,
+        n = (t.match(/(iPhone|iPad|iPod)/), t.match(/Android/i), window),
+        i = document,
+        a = i.documentElement,
+        o = (n.devicePixelRatio, 375),
+        d = 100,
+        r = (i.head.querySelector('[name="viewport"]'), i.createElement("style"));
+      
+      r.innerText = "html{font-size:100px !important}";
+      i.head.appendChild(r);
+      e();
+      n.addEventListener("resize", e, false);
+    })();
+  </script>
+</head>
+<body>
+<div id="app"></div>
+</body>
+</html>
