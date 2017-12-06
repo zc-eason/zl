@@ -1,6 +1,13 @@
 <template>
   <div>
-    <pullUp :items="items" :durationTime="durationTime"></pullUp>
+    <pullUp
+      :items="items"
+      :durationTime="durationTime"
+      :isloading="isloading"
+      :loadingEnd="loadingEnd"
+      :loadingFail="loadingFail"
+      v-on:fetchDateOnBottom="fetchDateOnBottom">
+    </pullUp>
   </div>
 </template>
 <script>
@@ -10,11 +17,51 @@
     data () {
       return {
         items: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
-        durationTime: 3000
+        durationTime: 3000,
+        isloading: false,
+        loadingEnd: false,
+        loadingFail: false,
+        totalCount: 0,
+        failOnce: 0
       }
     },
     components: {
       pullUp
+    },
+    methods: {
+      fetchDateOnBottom () {
+        let count = 0
+        if (this.loadingEnd) {
+          return
+        }
+//          alert('已经到最底部了！!')
+        if (!count) {
+          this.loadingFail = false
+          this.isloading = true
+          const fetchTimeOut = setTimeout(() => {
+            this.isloading = false
+            for (let i = 0; i < 10; i++) {
+              let newItem = i + 10
+              this.items.push(newItem)
+            }
+            this.totalCount++
+            count = 0
+            if (this.totalCount >= 5) {
+              // 加载6次加载完成
+              this.loadingEnd = true
+            }
+          }, 3000)
+          if (this.durationTime <= 3000 && this.totalCount === 1 && !this.failOnce) {
+            this.isloading = false
+            this.loadingFail = true
+            this.totalCount--
+            this.failOnce++
+            clearInterval(fetchTimeOut)
+          }
+          count++
+          console.log(`count${count}`)
+        }
+      }
     }
   }
 </script>

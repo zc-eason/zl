@@ -20,15 +20,18 @@
       durationTime: {
         type: Number,
         default: 2000
-      }
-    },
-    data () {
-      return {
-        isloading: false,
-        loadingEnd: false,
-        totalCount: 0,
-        loadingFail: false,
-        failOnce: 0
+      },
+      isloading: {
+        type: Boolean,
+        default: false
+      },
+      loadingEnd: {
+        type: Boolean,
+        default: false
+      },
+      loadingFail: {
+        type: Boolean,
+        default: false
       }
     },
     methods: {
@@ -43,46 +46,11 @@
       },
       onBottom () {
         if (this.getScrollTop() + this.getWindowHeight() === this.getScrollHeight()) {
-          let count = 0
-          if (this.loadingEnd) {
-            return
-          }
-//          alert('已经到最底部了！!')
-          if (!count) {
-            this.loadingFail = false
-            this.isloading = true
-            const fetchTimeOut = setTimeout(() => {
-              this.isloading = false
-              for (let i = 0; i < 10; i++) {
-                let newItem = i + 10
-                this.items.push(newItem)
-              }
-              this.totalCount++
-              count = 0
-              if (this.totalCount >= 5) {
-                // 加载6次加载完成
-                this.loadingEnd = true
-              }
-//            this.items.forEach((item) => {
-//              let newItem = item + 10
-//              this.items.push(newItem)
-//            })
-            }, 3000)
-            if (this.durationTime < 3000 && this.totalCount === 1 && !this.failOnce) {
-              this.isloading = false
-              this.loadingFail = true
-              this.totalCount--
-              this.failOnce++
-              clearInterval(fetchTimeOut)
-            }
-            count++
-            console.log(`count${count}`)
-          }
+          this.$emit('fetchDateOnBottom')
         }
       }
     },
     mounted () {
-      console.log(this)
       this.$nextTick(() => {
         window.addEventListener('scroll', this.onBottom)
       })

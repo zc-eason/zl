@@ -9,7 +9,7 @@
     export default {
         data () {
             return {
-                routeName: ['test', 'toast', 'calendar', 'calendarzijiayou', 'Pullup']
+                routeName: ['test', 'toast', 'calendar', 'calendarzijiayou', 'pullupImport']
             }
         },
         methods: {
