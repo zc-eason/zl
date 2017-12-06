@@ -1,12 +1,12 @@
 <template>
   <div>
-    <ul>
-      <li v-for='(index, item) in items'>{{item}}</li>
-    </ul>
     <div class="page-bottom">
-      <div v-if="isloading">正在加载中...</div>
-      <div v-if="loadingEnd">加载完成</div>
-      <div v-if="loadingFail" @click="onBottom(1)">加载失败,点击重新加载</div>
+      <div>正在加载中...</div>
+      <div>
+        <div v-if="isloading1">上啦加载更多，与三个相斥</div>
+        <div v-if="loadingEnd">加载完成</div>
+        <div v-if="loadingFail" @click="onBottom(1)">加载失败,点击重新加载</div>
+      </div>
     </div>
   </div>
 </template>
@@ -34,6 +34,12 @@
         default: false
       }
     },
+    computed: {
+      isloading1 () {
+
+        return isloading
+      }
+    },
     methods: {
       getScrollTop () {
         return document.documentElement.scrollTop || document.body.scrollTop
@@ -46,6 +52,7 @@
       },
       onBottom (param) {
         if (this.getScrollTop() + this.getWindowHeight() === this.getScrollHeight()) {
+         //  在这里面处理逻辑 
           this.$emit('fetchDateOnBottom', param)
         }
       }
