@@ -29,7 +29,9 @@
       pullUp
     },
     methods: {
-      fetchDateOnBottom () {
+      fetchDateOnBottom (param) {
+        if (param === 1) this.loadingFail = false
+        if (this.loadingFail) return
         let count = 0
         if (this.loadingEnd) {
           return

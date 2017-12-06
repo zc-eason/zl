@@ -6,7 +6,7 @@
     <div class="page-bottom">
       <div v-if="isloading">正在加载中...</div>
       <div v-if="loadingEnd">加载完成</div>
-      <div v-if="loadingFail" @click="onBottom">加载失败,点击重新加载</div>
+      <div v-if="loadingFail" @click="onBottom(1)">加载失败,点击重新加载</div>
     </div>
   </div>
 </template>
@@ -44,9 +44,9 @@
       getWindowHeight () {
         return document.documentElement.clientHeight || document.body.clientHeight
       },
-      onBottom () {
+      onBottom (param) {
         if (this.getScrollTop() + this.getWindowHeight() === this.getScrollHeight()) {
-          this.$emit('fetchDateOnBottom')
+          this.$emit('fetchDateOnBottom', param)
         }
       }
     },
