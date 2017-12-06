@@ -50,10 +50,13 @@
               // 加载6次加载完成
               this.loadingEnd = true
             }
-          }, 3000)
-          if (this.durationTime <= 3000 && this.totalCount === 1 && !this.failOnce) {
-            this.isloading = false
-            this.loadingFail = true
+          }, this.durationTime)
+          if (this.durationTime >= 2000 && this.totalCount === 1 && !this.failOnce) {
+            setTimeout(() => {
+              // 请求数据
+              this.isloading = false
+              this.loadingFail = true
+            }, this.durationTime)
             this.totalCount--
             this.failOnce++
             clearInterval(fetchTimeOut)
@@ -62,6 +65,9 @@
           console.log(`count${count}`)
         }
       }
+    },
+    mounted () {
+      window.scrollTo(0, 0)
     }
   }
 </script>
