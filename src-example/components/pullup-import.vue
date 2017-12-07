@@ -1,7 +1,7 @@
 <template>
   <div>
+    <div v-for="(index, item) in items" class="item-ui">{{item}}</div>
     <pullUp
-      :items="items"
       :durationTime="durationTime"
       :isloading="isloading"
       :loadingEnd="loadingEnd"
@@ -74,8 +74,7 @@
   }
 </script>
 <style lang="less">
-  ul>li{
-    width: 100%;
+  .item-ui{
     height: 100px;
     line-height:100px;
     text-align: center;
