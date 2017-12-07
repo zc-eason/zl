@@ -29,43 +29,34 @@
       pullUp
     },
     methods: {
-      fetchDateOnBottom (param) {
-        if (param === 1) this.loadingFail = false
-        if (this.loadingFail) return
-        let count = 0
-        if (this.loadingEnd) {
-          return
-        }
-//          alert('已经到最底部了！!')
-        if (!count) {
-          this.loadingFail = false
+      fetchDateOnBottom () {
           this.isloading = true
-          const fetchTimeOut = setTimeout(() => {
-            this.isloading = false
+        // 处理请求数据逻辑
+        const fetchTimeOut = setTimeout(() => {
             for (let i = 0; i < 10; i++) {
               let newItem = i + 10
               this.items.push(newItem)
             }
+            this.loadingFail = false
+            this.isloading = false
             this.totalCount++
-            count = 0
-            if (this.totalCount >= 5) {
+            if (this.totalCount >= 4) {
               // 加载6次加载完成
               this.loadingEnd = true
             }
           }, this.durationTime)
           if (this.durationTime >= 2000 && this.totalCount === 1 && !this.failOnce) {
             setTimeout(() => {
-              // 请求数据
+              // 请求数据失败 处理 先显示加载中,再显示加载失败
               this.isloading = false
               this.loadingFail = true
             }, this.durationTime)
+            // 加载失败总数减一
             this.totalCount--
+            // 下一次点击的时候failOnce要置为0
             this.failOnce++
             clearInterval(fetchTimeOut)
           }
-          count++
-          console.log(`count${count}`)
-        }
       }
     },
     mounted () {

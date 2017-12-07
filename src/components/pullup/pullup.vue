@@ -57,8 +57,13 @@
       },
       onBottom (param) {
         if (this.getScrollTop() + this.getWindowHeight() === this.getScrollHeight()) {
-         //  在这里面处理逻辑
-          this.$emit('fetchDateOnBottom', param)
+          if (param === 1) {
+            this.$emit('fetchDateOnBottom')
+          }
+          //  在这里面处理逻辑组件里实现逻辑的
+          if (this.loadingMore1) {
+            this.$emit('fetchDateOnBottom')
+          }
         }
       }
     },
