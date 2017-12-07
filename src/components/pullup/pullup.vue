@@ -56,10 +56,10 @@
         return document.documentElement.clientHeight || document.body.clientHeight
       },
       onBottom (param) {
+        if (param === 1) {
+          this.$emit('fetchDateOnBottom')
+        }
         if (this.getScrollTop() + this.getWindowHeight() === this.getScrollHeight()) {
-          if (param === 1) {
-            this.$emit('fetchDateOnBottom')
-          }
           //  在这里面处理逻辑组件里实现逻辑的
           if (this.loadingMore1) {
             this.$emit('fetchDateOnBottom')
