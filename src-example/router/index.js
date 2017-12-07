@@ -7,6 +7,7 @@ import Toast from '@/components/Toast'
 import Calendar from '@/components/calendar'
 import Calendarzijiayou from '@/components/calendarzijiayou'
 import pullupImport from '@/components/pullup-import'
+import actionSheet from '@/components/action-sheet'
 
 Vue.use(Router)
 const routes = [
@@ -44,6 +45,11 @@ const routes = [
     path: '/pullup-import',
     name: 'pullupImport',
     component: pullupImport
+  },
+  {
+    path: '/action-sheet',
+    name: 'actionSheet',
+    component: actionSheet
   }
 ]
 

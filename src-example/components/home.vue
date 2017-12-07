@@ -9,7 +9,7 @@
     export default {
         data () {
             return {
-                routeName: ['test', 'toast', 'calendar', 'calendarzijiayou', 'pullupImport']
+                routeName: ['test', 'toast', 'calendar', 'calendarzijiayou', 'pullupImport', 'actionSheet']
             }
         },
         methods: {
@@ -21,7 +21,7 @@
 </script>
 <style lang="less">
 .home {
-    width: 100;
+    width: 100%;
     height: 50px;
     line-height: 50px;
     text-align: center;

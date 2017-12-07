@@ -31,6 +31,7 @@
       fetchDateOnBottom () {
           this.isloading = true
           this.loadingFail = false
+        console.log(111)
         // 处理请求数据逻辑 项目里处理逻辑 等待ajax请求, 请求中, 请求回的数据抛错
         setTimeout(() => {
           if (this.totalCount === 1) {
