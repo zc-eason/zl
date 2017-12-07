@@ -58,12 +58,11 @@
       onBottom (param) {
         if (param === 1) {
           this.$emit('fetchDateOnBottom')
+          return
         }
-        if (this.getScrollTop() + this.getWindowHeight() === this.getScrollHeight()) {
+        if (this.getScrollTop() + this.getWindowHeight() === this.getScrollHeight() && this.loadingMore1) {
           //  在这里面处理逻辑组件里实现逻辑的
-          if (this.loadingMore1) {
-            this.$emit('fetchDateOnBottom')
-          }
+          this.$emit('fetchDateOnBottom')
         }
       }
     },
