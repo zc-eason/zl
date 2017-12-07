@@ -60,7 +60,7 @@
           this.$emit('fetchDateOnBottom')
           return
         }
-        if (this.getScrollTop() + this.getWindowHeight() === this.getScrollHeight() && this.loadingMore1) {
+        if (this.getScrollTop() + this.getWindowHeight() >= (this.getScrollHeight() - 20) && this.loadingMore1) {
           //  在这里面处理逻辑组件里实现逻辑的
           this.$emit('fetchDateOnBottom')
         }
