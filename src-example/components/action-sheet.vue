@@ -54,7 +54,7 @@
 .action-sheet-wrapper{
   width: 100%;
   box-sizing: border-box;
-  padding: 200px 15px;
+  padding: 200px 0;
   .action-sheet-button{
     background-color: #f6f8fa;
     box-shadow: 0 0 1PX #b8bbbf;
@@ -62,7 +62,7 @@
     line-height: 50px;
     text-align: center;
     font-size: 20px;
-    margin-bottom: 20px;
+    margin: 0 15px 20px ;
   }
 }
 </style>
