@@ -4,7 +4,9 @@
     <div class="action-sheet-button" @click="noCancelButton">不带取消按钮的action sheet</div>
     <actionSheet
       :actions="actions"
-      :sheetVisible="sheetVisible">
+      :sheetVisible="sheetVisible"
+      v-on:changeVisible='changeVisible'
+      >
     </actionSheet>
   </div>
 </template>
@@ -41,6 +43,9 @@
       cancel () {
         this.sheetVisible = false
         console.log('取消吧,不选啦!')
+      },
+      changeVisible () {
+        this.sheetVisible = false
       }
     }
   }

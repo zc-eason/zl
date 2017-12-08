@@ -1,11 +1,13 @@
 <template>
-  <div class="sheet-wrapper" v-if="Visible">
+  <div class="sheet-wrapper" v-if="Visible" @click="changeVisible">
     <div class="show-mask">
+      <transition name="fade" appear>
       <div class="sheet-items">
-        <div class="sheet-item" v-for="(action, index) in actions" @click="actionToFather(action, index)">
-          {{action.name}}
-        </div>
+          <div class="sheet-item" v-for="(action, index) in actions" @click="actionToFather(action, index)">
+            {{action.name}}
+          </div>
       </div>
+      </transition>
     </div>
   </div>
 </template>
@@ -32,6 +34,9 @@
         // 为什么在这里调用函数可以，不用$emit
         // 因为action把这个函数也带过来了
         actionMethod(action, index)
+      },
+      changeVisible () {
+        this.$emit('changeVisible')
       }
     }
   }
@@ -60,4 +65,17 @@
       text-align: center;
     }
   }
+  @keyframes aslide {
+    0% {
+      margin-bottom: -100px;
+    }
+    100% {
+      margin-bottom: 0;
+    }
+  }
+  .fade-enter-active, .fade-leave-active {
+    transition: all .5s ease-out;
+    animation: aslide .5s;
+  }
+  .fade-enter, .fade-leave-to { opacity: 0; }
 </style>
