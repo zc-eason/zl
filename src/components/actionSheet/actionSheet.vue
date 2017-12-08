@@ -1,8 +1,10 @@
 <template>
-  <div class="sheet-wrapper" v-if="sheetVisible">
+  <div class="sheet-wrapper" v-if="Visible">
     <div class="show-mask">
       <div class="sheet-items">
-        <div class="sheet-item" v-for="action in actions">{{action}}</div>
+        <div class="sheet-item" v-for="(action, index) in actions" @click="actionToFather(action, index)">
+          {{action.name}}
+        </div>
       </div>
     </div>
   </div>
@@ -17,6 +19,19 @@
       sheetVisible: {
         type: Boolean,
         default: false
+      }
+    },
+    computed: {
+      Visible () {
+        return this.sheetVisible
+      }
+    },
+    methods: {
+      actionToFather (action, index) {
+        const actionMethod = this.actions[index].method
+        // 为什么在这里调用函数可以，不用$emit
+        // 因为action把这个函数也带过来了
+        actionMethod(action, index)
       }
     }
   }

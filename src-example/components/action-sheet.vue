@@ -14,7 +14,9 @@
   export default{
     data () {
       return {
-        actions: ['拍照', '从相册中选择', '取消'],
+        actions: [{name: '拍照', method: this.takePhoto},
+                  {name: '从照片中选择', method: this.choicePhoto},
+                  {name: '取消', method: this.cancel}],
         sheetVisible: false
       }
     },
@@ -27,6 +29,18 @@
       },
       noCancelButton () {
         this.sheetVisible = true
+      },
+      takePhoto () {
+        this.sheetVisible = false
+        console.log('我要调起手机拍照功能啦~')
+      },
+      choicePhoto () {
+        this.sheetVisible = false
+        console.log('我想从手机相册里选择照片')
+      },
+      cancel () {
+        this.sheetVisible = false
+        console.log('取消吧,不选啦!')
       }
     }
   }
@@ -43,6 +57,7 @@
     line-height: 50px;
     text-align: center;
     font-size: 20px;
+    margin-bottom: 20px;
   }
 }
 </style>
