@@ -1,7 +1,9 @@
 <template>
   <div>
     <div>基础用法</div>
-    <swipe :pictures="pictures"></swipe>
+    <swipe
+      :slideList='slideList'
+    ></swipe>
   </div>
 </template>
 <script>
@@ -10,12 +12,24 @@
     data () {
       return {
         autoTime: 0,
-        pictures: [require('../../src-example/assets/swipe/1.jpg'),
-                  require('../../src-example/assets/swipe/2.jpg'),
-                  require('../../src-example/assets/swipe/3.jpg'),
-                  require('../../src-example/assets/swipe/4.jpg'),
-                  require('../../src-example/assets/swipe/5.jpg')
-                  ]
+        slideList: [
+          {
+            'clickUrl': '#',
+            'desc': 'nhwc',
+            'image': require('../../src-example/assets/swipe/2.jpg')
+          },
+          {
+            'clickUrl': '#',
+            'desc': 'hxrj',
+            'image': require('../../src-example/assets/swipe/3.jpg')
+          },
+          {
+            'clickUrl': '#',
+            'desc': 'rsdh',
+            'image': require('../../src-example/assets/swipe/4.jpg')
+          }
+        ],
+        timer: ''
       }
     },
     components: {
@@ -23,6 +37,6 @@
     }
   }
 </script>
-<style lang="less">
+<style lang='less'>
 
 </style>
