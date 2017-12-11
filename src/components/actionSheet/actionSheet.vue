@@ -1,14 +1,15 @@
 <template>
   <div class="sheet-wrapper" v-if="Visible" @click="changeVisible">
-    <div class="show-mask">
-      <transition name="fade" appear>
+    <transition name="fade-in" appear>
+      <div class="show-mask"></div>
+    </transition>
+    <transition name="fade" appear>
       <div class="sheet-items">
           <div class="sheet-item" v-for="(action, index) in actions" @click="actionToFather(action, index)">
             {{action.name}}
           </div>
       </div>
-      </transition>
-    </div>
+    </transition>
   </div>
 </template>
 <script>
@@ -60,6 +61,7 @@
       z-index: 100;
     }
     .sheet-item{
+      width: 100%;
       height: 40px;
       line-height: 40px;
       text-align: center;
@@ -77,4 +79,10 @@
     animation: aslide .5s;
   }
   .fade-enter, .fade-leave-to { opacity: 0; }
+  .fade-in-enter-active, .fade-in-leave-active{
+    transition: opacity .5s ease-in;
+  }
+  .fade-in-enter, .fade-in-leave-to {
+    opacity: 0;
+  }
 </style>
