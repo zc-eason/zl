@@ -18,7 +18,7 @@
       return {
         actions: [{name: '拍照', method: this.takePhoto},
                   {name: '从照片中选择', method: this.choicePhoto},
-                  {name: '取消', method: this.cancel}],
+                  {name: '取消', method: this.cancel}, {name: '取消', method: this.cancel}, {name: '取消', method: this.cancel}],
         sheetVisible: false
       }
     },

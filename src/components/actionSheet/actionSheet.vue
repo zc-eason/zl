@@ -67,10 +67,9 @@
   }
   @keyframes aslide {
     0% {
-      margin-bottom: -100px;
+      transform: translateY(100%)
     }
     100% {
-      margin-bottom: 0;
     }
   }
   .fade-enter-active, .fade-leave-active {
