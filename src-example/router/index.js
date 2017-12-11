@@ -8,6 +8,7 @@ import Calendar from '@/components/calendar'
 import Calendarzijiayou from '@/components/calendarzijiayou'
 import pullupImport from '@/components/pullup-import'
 import actionSheet from '@/components/action-sheet'
+import swipe from '@/components/swipe'
 
 Vue.use(Router)
 const routes = [
@@ -50,6 +51,11 @@ const routes = [
     path: '/action-sheet',
     name: 'actionSheet',
     component: actionSheet
+  },
+  {
+    path: '/swipe',
+    name: 'swipe',
+    component: swipe
   }
 ]
 

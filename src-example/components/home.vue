@@ -9,7 +9,8 @@
     export default {
         data () {
             return {
-                routeName: ['test', 'toast', 'calendar', 'calendarzijiayou', 'pullupImport', 'actionSheet']
+                routeName: ['test', 'toast', 'calendar', 'calendarzijiayou', 'pullupImport', 'actionSheet',
+                            'swipe']
             }
         },
         methods: {
