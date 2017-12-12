@@ -11,8 +11,14 @@
   }
   .mint-swipe-items-wrap > div {
     position: absolute;
-    transform: translateX(-100%);
+    transform: translateX(100%);
+    width: 100%;
+    height: 100%;
     /*display: none;*/
+  }
+  .mint-swipe-items-wrap > .is-active{
+    display: block;
+    transform: none;
   }
   .mint-swipe-indicators {
     position: absolute;
@@ -26,11 +32,11 @@
     display: inline-block;
     border-radius: 100%;
     background: red;
-    opacity: 0.2;
+    opacity: 0.5;
     margin: 0 3px;
   }
-  
-  .is-active{
+
+  .mint-swipe-indicators >.is-active{
     background: blue;
   }
 </style>
