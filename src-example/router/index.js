@@ -9,6 +9,7 @@ import Calendarzijiayou from '@/components/calendarzijiayou'
 import pullupImport from '@/components/pullup-import'
 import actionSheet from '@/components/action-sheet'
 import swipe from '@/components/swipe'
+import mintSwipe from '@/components/mint-swipe'
 
 Vue.use(Router)
 const routes = [
@@ -56,6 +57,11 @@ const routes = [
     path: '/swipe',
     name: 'swipe',
     component: swipe
+  },
+  {
+    path: '/mint-swipe',
+    name: 'mintSwipe',
+    component: mintSwipe
   }
 ]
 

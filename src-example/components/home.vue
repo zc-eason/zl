@@ -10,7 +10,7 @@
         data () {
             return {
                 routeName: ['test', 'toast', 'calendar', 'calendarzijiayou', 'pullupImport', 'actionSheet',
-                            'swipe']
+                            'swipe', 'mintSwipe']
             }
         },
         methods: {
