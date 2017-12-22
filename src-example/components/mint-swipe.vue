@@ -1,6 +1,6 @@
 <template>
   <div>
-    <mint-swipe :show-indicators="true" v-if="slideList">
+    <mint-swipe :show-indicators="true" v-if="slideList" :auto="5000" :speed="1000" :defaultIndex="2">
       <mint-swipe-item v-for="(item, index) in slideList" :key="index">
         <a style="display: block" :href="item.clickUrl">
           <img :src="item.image"/>
