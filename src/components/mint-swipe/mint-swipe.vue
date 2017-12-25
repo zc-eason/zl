@@ -169,6 +169,7 @@
           }
         })
         this.pages = pages
+        console.log(this.pages)
       },
       doAnimate (towards, options) {
         if (this.$children.length === 0) return
@@ -299,6 +300,7 @@
         dragState.startTopAbsolute = touch.clientY
         dragState.pageWidth = element.offsetWidth
         dragState.pageHeight = element.offsetHeight
+        console.log(dragState)
         var prevPage = this.$children[this.index - 1]
         var dragPage = this.$children[this.index]
         var nextPage = this.$children[this.index + 1]

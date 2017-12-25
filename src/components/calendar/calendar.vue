@@ -19,20 +19,20 @@
                 </g>
                 </svg>
             </span>
-            <div class="calendar-info" @click.stop="changeYear">
+            <div class="calendar-info">
                 <!-- {{monthString}} -->
                 <div class="month">
-                    <div class="month-inner" :style="{'top':-(this.month*20)+'px'}">
-                        <span v-for="m in months">{{m}}</span>
-                    </div>
+                    <!-- <div class=""> -->
+                        <span>{{`${year}年${month + 1}月`}}</span>
+                    <!-- </div> -->
                 </div>
-                <div class="year">{{year}}</div>
+                <!-- <div class="year">{{year}}</div> -->
             </div>
         </div>
         <table cellpadding="5">
         <thead>
             <tr>
-                <td v-for="week in weeks" class="week">{{week}}</td>
+                <td v-for="week, index in weeks" class="week">{{week}}</td>
             </tr>
         </thead>
         <tbody>
@@ -546,17 +546,22 @@ export default {
     font-size: 20px;
     line-height: 40px;
     color:#5e7a88;
+    position: relative;
 }
 .calendar-tools span{
     cursor: pointer;
 }
 .calendar-prev{
     width: 14.28571429%;
-    float:left;
+    /* display: inline-block; */
+    /* float:left; */
+    position: absolute;
+    left: 70px;
+    z-index: 999;
     text-align: center;
 }
 .calendar-info{
-    padding-top: 3px;
+    padding-top: 8px;
     font-size:16px;
     line-height: 1.3;
     text-align: center;
@@ -591,8 +596,12 @@ export default {
    color:#999;
 }
 .calendar-next{
+    /* display: inline-block; */
     width: 14.28571429%;
-    float:right;
+    position: absolute;
+    right: 70px;
+    z-index: 999;
+    /* float:right; */
     text-align: center;
 }
  
@@ -617,9 +626,19 @@ export default {
     vertical-align: top;
 }
 .calendar td.week{
+    background-color: #999;
     font-size:10px;
     pointer-events:none !important;
-    cursor: default !important;    
+    cursor: default !important;
+    border-color: #999;  
+}
+.calendar td.week:first-child{
+   border-top-left-radius:  20px;
+   border-bottom-left-radius:  20px;    
+}
+.calendar td.week:last-child{
+   border-top-right-radius:  20px;
+   border-bottom-right-radius:  20px;    
 }
 .calendar td.disabled {
     color: #ccc;

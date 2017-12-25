@@ -3,7 +3,11 @@
     <div>基础用法</div>
     <swipe
       :slideList='slideList'
-    ></swipe>
+    >
+    <div>
+      
+    </div>
+    </swipe>
   </div>
 </template>
 <script>

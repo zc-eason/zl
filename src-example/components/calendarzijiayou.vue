@@ -12,7 +12,7 @@
 
 <script>
 /* eslint-disable */
-import calendar from '../../src/components/calendarzijiayou/calendar.vue'
+import calendar from '../../src/components/calendar/calendar.vue'
 export default {
     name: 'app',
     components: {
