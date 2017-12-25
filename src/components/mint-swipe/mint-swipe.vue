@@ -11,10 +11,10 @@
   }
   .mint-swipe-items-wrap > div {
     position: absolute;
-    transform: translateX(100%);
+    transform: translateX(-100%);
     width: 100%;
     height: 100%;
-    /*display: none;*/
+    display: none;
   }
   .mint-swipe-items-wrap > .is-active{
     display: block;

@@ -7,6 +7,7 @@
 <script>
   export default {
     mounted () {
+      console.log(`this.slideList${this.slideList}`)
       this.$parent && this.$parent.swipeItemCreated(this)
     },
     destroyed () {
@@ -15,12 +16,8 @@
   }
 </script>
 <style lang="less">
-  .mint-swipe-item{
-    width: 100%;
-    height: 400px;
-  }
   img{
-    width: 100%;
-    vertical-align: middle;
+  width: 100%;
+  vertical-align: middle;
   }
 </style>
