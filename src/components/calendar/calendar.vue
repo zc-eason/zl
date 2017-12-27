@@ -29,6 +29,20 @@
                 <!-- <div class="year">{{year}}</div> -->
             </div>
         </div>
+        <!-- box弹性布局 -->
+        <div class="zl-calendar">
+            <div class="zl-calendar-header zl-box">
+                <div class="zl-center zl-flex-1" v-for="week, index in weeks">{{week}}</div>
+            </div>
+            <div class="">
+                <div v-for="(day,k1) in days" class="zl-box">
+                    <div v-for="(child,k2) in day" class="zl-flex-1 zl-center" :class="{'selected':child.selected,'disabled':child.disabled}">
+                        <span>{{child.day}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- table -->
         <table cellpadding="5">
         <thead>
             <tr>
@@ -531,7 +545,29 @@ export default {
 /* eslint-enable */
 </script>
 
-<style scoped>
+<style lang="less" scoped>
+.zl-box {
+    display: -webkit-box;
+    -webkit-box-align: center;
+}
+.zl-cbox {
+    display: -webkit-box;
+    -webkit-box-align: center;
+    -webkit-box-origin: vertical;
+    -webkit-box-pack: center;
+}
+.zl-flex-1 {
+    -webkit-box-flex: 1;
+    width: 0px;
+}
+.zl-center {
+    text-align: center;
+}
+.zl-calendar {
+    &-header {
+        height: 30px;
+    }
+}
 .calendar {
     margin:auto;
     width: 100%;
