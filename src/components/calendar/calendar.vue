@@ -29,6 +29,20 @@
                 <!-- <div class="year">{{year}}</div> -->
             </div>
         </div>
+        <!-- box弹性布局 -->
+        <!-- <div class="zl-calendar">
+            <div class="zl-calendar-header zl-box">
+                <div class="zl-center zl-flex-1" v-for="week, index in weeks">{{week}}</div>
+            </div>
+            <div class="">
+                <div v-for="(day,k1) in days" class="zl-box">
+                    <div v-for="(child,k2) in day" class="zl-flex-1 zl-center" :class="{'selected':child.selected,'disabled':child.disabled}">
+                        <span>{{child.day}}</span>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+        <!-- table -->
         <table cellpadding="5">
         <thead>
             <tr>
@@ -36,11 +50,13 @@
             </tr>
         </thead>
         <tbody>
-        <tr v-for="(day,k1) in days" style="{'animation-delay',(k1*30)+'ms'}">
-            <td v-for="(child,k2) in day" :class="{'selected':child.selected,'disabled':child.disabled}" @click="select(k1,k2,$event)">
-                <span :class="{'red':k2==0||k2==6||((child.isLunarFestival||child.isGregorianFestival) && lunar)}">{{child.day}}</span>
-                <div class="text" v-if="child.eventName!=undefined">{{child.eventName}}</div>
-                <div class="text" :class="{'isLunarFestival':child.isLunarFestival,'isGregorianFestival':child.isGregorianFestival}" v-if="lunar">{{child.lunar}}</div>
+        <tr v-for="(day,k1) in days">
+            <td v-for="(child,k2) in day" :class="{'selected':child.selected,'disabled':child.disabled}" @click="select(k1,k2,$event,child)">
+                <span>
+                    {{child.day}}
+                </span>
+                <!-- <div class="text" v-if="child.eventName!=undefined">{{child.eventName}}</div> -->
+                <!-- <div class="text" :class="{'isLunarFestival':child.isLunarFestival,'isGregorianFestival':child.isGregorianFestival}" v-if="lunar">{{child.lunar}}</div> -->
             </td>
         </tr>
         </tbody>
@@ -197,8 +213,8 @@ export default {
         },
         // 渲染日期
         render(y, m) {
-            let firstDayOfMonth = new Date(y, m, 1).getDay()         //当月第一天
-            let lastDateOfMonth = new Date(y, m + 1, 0).getDate()    //当月最后一天
+            let firstDayOfMonth = new Date(y, m, 1).getDay()         //当月第一天是星期几
+            let lastDateOfMonth = new Date(y, m + 1, 0).getDate()    //当月有多少天
             let lastDayOfLastMonth = new Date(y, m, 0).getDate()     //最后一月的最后一天
             this.year = y
             let seletSplit = this.value
@@ -214,11 +230,11 @@ export default {
                     k = lastDayOfLastMonth - firstDayOfMonth + 1
                     for (let j = 0; j < firstDayOfMonth; j++) {
                         // console.log("第一行",lunarYear,lunarMonth,lunarValue,lunarInfo)
-                        temp[line].push(Object.assign(
-                            {day: k,disabled: true},
-                            this.getLunarInfo(this.computedPrevYear(),this.computedPrevMonth(true),k),
-                            this.getEvents(this.computedPrevYear(),this.computedPrevMonth(true),k),
-                        ))
+                        temp[line].push(
+                            {day: '', disabled: true}
+                            // this.getLunarInfo(this.computedPrevYear(),this.computedPrevMonth(true),k),
+                            // this.getEvents(this.computedPrevYear(),this.computedPrevMonth(true),k),
+                        )
                         k++;
                     }
                 }
@@ -319,11 +335,7 @@ export default {
                     let k = 1
                     for (let d=day; d < 6; d++) {
                          // console.log(this.computedNextYear()+"-"+this.computedNextMonth(true)+"-"+k)
-                        temp[line].push(Object.assign(
-                            {day: k,disabled: true},
-                            this.getLunarInfo(this.computedNextYear(),this.computedNextMonth(true),k),
-                            this.getEvents(this.computedNextYear(),this.computedNextMonth(true),k),
-                        ))
+                        temp[line].push({day: '', disabled: true})
                         k++
                     }
                     // 下个月除了补充的前几天开始的日期
@@ -333,20 +345,20 @@ export default {
 
             // console.log(this.year+"/"+this.month+"/"+this.day+":"+line)
             // 补充第六行让视觉稳定
-            if(line<=5 && nextMonthPushDays>0){
-                // console.log({nextMonthPushDays:nextMonthPushDays,line:line})
-                for (let i = line+1; i<=5; i++) {
-                    temp[i] = []
-                    let start=nextMonthPushDays+(i-line-1)*7
-                    for (let d=start; d <= start+6; d++) {
-                        temp[i].push(Object.assign(
-                            {day: d,disabled: true},
-                            this.getLunarInfo(this.computedNextYear(),this.computedNextMonth(true),d),
-                            this.getEvents(this.computedNextYear(),this.computedNextMonth(true),d),
-                        ))
-                    }  
-                }
-            }
+            // if(line<=5 && nextMonthPushDays>0){
+            //     // console.log({nextMonthPushDays:nextMonthPushDays,line:line})
+            //     for (let i = line+1; i<=5; i++) {
+            //         temp[i] = []
+            //         let start=nextMonthPushDays+(i-line-1)*7
+            //         for (let d=start; d <= start+6; d++) {
+            //             temp[i].push(Object.assign(
+            //                 {day: d,disabled: true},
+            //                 this.getLunarInfo(this.computedNextYear(),this.computedNextMonth(true),d),
+            //                 this.getEvents(this.computedNextYear(),this.computedNextMonth(true),d),
+            //             ))
+            //         }  
+            //     }
+            // }
             this.days = temp
         },
         computedPrevYear(){
@@ -442,7 +454,8 @@ export default {
             this.render(this.year, this.month)
         },
         // 选中日期
-        select(k1, k2, e) {
+        select(k1, k2, e, v) {
+            if (!v.day) return
             if (e != undefined) e.stopPropagation()
                 // 日期范围
             if (this.range) {
@@ -531,7 +544,29 @@ export default {
 /* eslint-enable */
 </script>
 
-<style scoped>
+<style lang="less" scoped>
+.zl-box {
+    display: -webkit-box;
+    -webkit-box-align: center;
+}
+.zl-cbox {
+    display: -webkit-box;
+    -webkit-box-align: center;
+    -webkit-box-origin: vertical;
+    -webkit-box-pack: center;
+}
+.zl-flex-1 {
+    -webkit-box-flex: 1;
+    width: 0px;
+}
+.zl-center {
+    text-align: center;
+}
+.zl-calendar {
+    &-header {
+        height: 30px;
+    }
+}
 .calendar {
     margin:auto;
     width: 100%;
