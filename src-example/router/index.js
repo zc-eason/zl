@@ -10,6 +10,7 @@ import pullupImport from '@/components/pullup-import'
 import actionSheet from '@/components/action-sheet'
 import swipe from '@/components/swipe'
 import mintSwipe from '@/components/mint-swipe'
+import inputExample from '@/components/wk-input-example'
 
 Vue.use(Router)
 const routes = [
@@ -62,6 +63,11 @@ const routes = [
     path: '/mint-swipe',
     name: 'mintSwipe',
     component: mintSwipe
+  },
+  {
+    path: '/input-example',
+    name: 'inputExample',
+    component: inputExample
   }
 ]
 
