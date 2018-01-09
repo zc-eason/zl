@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
 import Home from '@/components/home'
 import Test from '@/components/test'
 import Toast from '@/components/Toast'
@@ -15,57 +14,53 @@ import inputExample from '@/components/wk-input-example'
 Vue.use(Router)
 const routes = [
   {
-    path: '/',
-    name: 'Hello',
-    component: HelloWorld
-  },
-  {
-    path: '/home',
+    path: '/zswloveljp/home',
     name: 'home',
+    alias: ['/', '/zswloveljp'],
     component: Home
   },
   {
-    path: '/test',
+    path: '/zswloveljp/test',
     name: 'test',
     component: Test
   },
   {
-    path: '/toast',
+    path: '/zswloveljp/toast',
     name: 'toast',
     component: Toast
   },
   {
-    path: '/calendar',
-    name: 'calendar',
+    path: '/zswloveljp/calendar',
+    name: '/zswloveljpcalendar',
     component: Calendar
   },
   {
-    path: '/calendarzijiayou',
+    path: '/zswloveljp/calendarzijiayou',
     name: 'calendarzijiayou',
     component: Calendarzijiayou
   },
   {
-    path: '/pullup-import',
+    path: '/zswloveljp/pullup-import',
     name: 'pullupImport',
     component: pullupImport
   },
   {
-    path: '/action-sheet',
+    path: '/zswloveljp/action-sheet',
     name: 'actionSheet',
     component: actionSheet
   },
   {
-    path: '/swipe',
+    path: '/zswloveljp/swipe',
     name: 'swipe',
     component: swipe
   },
   {
-    path: '/mint-swipe',
+    path: '/zswloveljp/mint-swipe',
     name: 'mintSwipe',
     component: mintSwipe
   },
   {
-    path: '/input-example',
+    path: '/zswloveljp/input-example',
     name: 'inputExample',
     component: inputExample
   }
