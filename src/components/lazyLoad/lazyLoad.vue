@@ -31,8 +31,7 @@
         const scrollTop = document.documentElement.scrollTop || document.body.scrollTop
         // 滚动条距离顶部高度 起始为0 随着滚动增加慢慢增加
         for (var i = n; i < imageListsLength; i++) {
-          console.log(img[i].offsetParent)
-            if (img[i].offsetParent < seeHeight + scrollTop) {
+            if (img[i].offsetTop < seeHeight + scrollTop) {
                 if (img[i].getAttribute('src') === '../../../static/1.jpg') {
                     img[i].src = img[i].getAttribute('data-src')
                 }
