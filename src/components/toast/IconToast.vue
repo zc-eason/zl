@@ -23,18 +23,18 @@
     background-size: 100px 100px;
   }
   .toast-bis-style{
-     width: 200px;
+    width: 300px;
+    height: 300px;
     position:absolute;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    opacity: .8;
+    //opacity: .8;
     padding: 10px 20px;
     color: black;
     font-size: 14px;
     text-align: center;
     transform-origin: -50% -50%;
-    
   }
 
   .fade-enter-active {

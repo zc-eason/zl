@@ -10,7 +10,8 @@ import actionSheet from '@/components/action-sheet'
 import swipe from '@/components/swipe'
 import mintSwipe from '@/components/mint-swipe'
 import inputExample from '@/components/wk-input-example'
-
+import wheel from '@/components/wheel'
+import lazyLoad from '@/components/lazyLoad'
 Vue.use(Router)
 const routes = [
   {
@@ -63,6 +64,16 @@ const routes = [
     path: '/zswloveljp/input-example',
     name: 'inputExample',
     component: inputExample
+  },
+  {
+    path: '/zswloveljp/wheel',
+    name: 'wheel',
+    component: wheel
+  },
+  {
+    path: '/zswloveljp/lazyLoad',
+    name: 'lazyLoad',
+    component: lazyLoad
   }
 ]
 
