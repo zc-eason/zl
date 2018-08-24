@@ -13,6 +13,7 @@ import inputExample from '@/components/wk-input-example'
 import wheel from '@/components/wheel'
 import lazyLoad from '@/components/lazyLoad'
 import range from '@/components/range'
+import newCalendar from '@/components/new-calendar'
 
 Vue.use(Router)
 const routes = [
@@ -81,6 +82,11 @@ const routes = [
     path: '/zswloveljp/range',
     name: 'range',
     component: range
+  },
+  {
+    path: '/zswloveljp/new-calendar',
+    name: 'newCalendar',
+    component: newCalendar
   }
 ]
 

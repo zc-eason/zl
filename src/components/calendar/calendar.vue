@@ -360,6 +360,7 @@ export default {
             //     }
             // }
             this.days = temp
+            console.log(this.days)
         },
         computedPrevYear(){
             let value=this.year
