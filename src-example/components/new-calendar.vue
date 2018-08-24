@@ -5,7 +5,7 @@
           <div class="day-one" v-for="week in weeks">{{week}}</div>
         </div>
         <div class="flex-row" v-for="calendarDay in calendarDays">
-          <div class="day-one" v-for="everyDay in calendarDay" v-if="calendarDay">{{everyDay.day}}</div>
+          <div class="day-one" v-for="everyDay in calendarDay" v-if="calendarDay.length>0">{{everyDay.day}}</div>
         </div>
       </div>
     </div>
@@ -35,7 +35,7 @@
           let month = now.getMonth();   // 当前月 实际是month+1
           let day = now.getDate();       // 当前日期
           year = 2018
-          month = 11
+          month = 8
           day = 27
           let firstDayOfNowMonth = new Date(year, month, 1).getDay();  // 当月第一天 星期几
           let alllastDateOfNowMonth = new Date(year, month, 0).getDate() // 上月总天数(上月最后一天日期)
@@ -87,14 +87,16 @@
   background: #eee;
 }
 .flex-row{
-  height: 50px;
   display: flex;
   flex-direction: row;
   align-items: center;
   text-align: center;
 }
 .day-one {
+  /* 使高度被内容撑开 */
   width: 50px;
+  height: 50px;
+  line-height: 50px;
   /* flex: 1; */
 }
 </style>
