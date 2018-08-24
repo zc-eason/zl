@@ -1,6 +1,9 @@
 <template>
     <div class="new-calendar-wrapper">
       <div class="calendar-flex">
+        <div class="flex-row">
+          <div class="day-one" v-for="week in weeks">{{week}}</div>
+        </div>
         <div class="flex-row" v-for="calendarDay in calendarDays">
           <div class="day-one" v-for="everyDay in calendarDay">{{everyDay.day}}</div>
         </div>
@@ -19,7 +22,8 @@
             [ {"day":1,"disabled":false,'lunar':"23" }, {"day":2,"disabled":false,'lunar':"23"}, {"day":3,"disabled":false,'lunar':"23"}, {"day":4,"disabled":false,'lunar':"23"} , {"day":5,"disabled":false,'lunar':"23"}, {"day":6,"disabled":false,'lunar':"23"}, {"day":0,"disabled":false,'lunar':"23"} ],
             [ {"day":1,"disabled":false,'lunar':"23" }, {"day":2,"disabled":false,'lunar':"23"}, {"day":3,"disabled":false,'lunar':"23"}, {"day":4,"disabled":false,'lunar':"23"} , {"day":5,"disabled":false,'lunar':"23"}, {"day":6,"disabled":false,'lunar':"23"}, {"day":0,"disabled":false,'lunar':"23"} ],
             [ {"day":1,"disabled":false,'lunar':"23" }, {"day":2,"disabled":false,'lunar':"23"}, {"day":3,"disabled":false,'lunar':"23"}, {"day":4,"disabled":false,'lunar':"23"} , {"day":5,"disabled":false,'lunar':"23"}, {"day":6,"disabled":false,'lunar':"23"}, {"day":0,"disabled":false,'lunar':"23"} ]
-         ]
+         ],
+         weeks: ['日', '一', '二', '三', '四', '五', '六']
         }
       },
       methods: {
@@ -36,7 +40,7 @@
           for(var i=1;i<allDateOfNowMonth+1;i++) {
             // 循环每一天
             var nowDay = new Date(year, month, i).getDay();    // 当前星期几
-            if (nowDay == 6) {
+            if (nowDay == 0) {
               // 每个周末创建一个数组
               column++
               allDays[column] = []
@@ -45,10 +49,13 @@
               // 第一天时, 创建第一行数组,当前周几,并补全前面的几天 29 index->0 30 index->1 31 index->2  1号 index->3  2号index->4
               allDays[column] = []
               for(var j=0;j<nowDay;j++) {
-                  allDays[column].push({"day":alllastDateOfNowMonth--,"disabled":false,'lunar':"23" })
+                  allDays[column].push({"day":alllastDateOfNowMonth--,"disabled":true,'lunar':"23" })
+                  allDays[column].reverse()
               }
             }
+            allDays[column].push({"day":i,"disabled":false,'lunar':"23" })
           }
+          this.calendarDays = allDays;
           console.log(allDays)
         }
       },
@@ -76,7 +83,8 @@
   text-align: center;
 }
 .day-one {
-  flex: 1;
+  width: 50px;
+  /* flex: 1; */
 }
 </style>
 
