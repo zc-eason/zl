@@ -5,7 +5,7 @@
           <div class="day-one" v-for="week in weeks">{{week}}</div>
         </div>
         <div class="flex-row" v-for="calendarDay in calendarDays">
-          <div class="day-one" v-for="everyDay in calendarDay">{{everyDay.day}}</div>
+          <div class="day-one" v-for="everyDay in calendarDay" v-if="calendarDay">{{everyDay.day}}</div>
         </div>
       </div>
     </div>
@@ -32,8 +32,11 @@
           let column = 0;  // 第一行数据
           let now = new Date();
           let year = now.getFullYear(); // 当前年
-          let month = now.getMonth();   // 当前月
+          let month = now.getMonth();   // 当前月 实际是month+1
           let day = now.getDate();       // 当前日期
+          year = 2018
+          month = 11
+          day = 27
           let firstDayOfNowMonth = new Date(year, month, 1).getDay();  // 当月第一天 星期几
           let alllastDateOfNowMonth = new Date(year, month, 0).getDate() // 上月总天数(上月最后一天日期)
           let allDateOfNowMonth = new Date(year, month + 1, 0).getDate() // 当月总天数
@@ -50,8 +53,8 @@
               allDays[column] = []
               for(var j=0;j<nowDay;j++) {
                   allDays[column].push({"day":alllastDateOfNowMonth--,"disabled":true,'lunar':"23" })
-                  allDays[column].reverse()
               }
+              allDays[column].reverse()
             }
             allDays[column].push({"day":i,"disabled":false,'lunar':"23" })
             if (i == allDateOfNowMonth) {
@@ -64,6 +67,7 @@
             }
           }
           this.calendarDays = allDays;
+          console.log(this.calendarDays)
         }
       },
       created() {
