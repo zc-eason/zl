@@ -37,7 +37,7 @@
           let firstDayOfNowMonth = new Date(year, month, 1).getDay();  // 当月第一天 星期几
           let alllastDateOfNowMonth = new Date(year, month, 0).getDate() // 上月总天数(上月最后一天日期)
           let allDateOfNowMonth = new Date(year, month + 1, 0).getDate() // 当月总天数
-          for(var i=1;i<allDateOfNowMonth+1;i++) {
+          for(var i=1;i<=allDateOfNowMonth;i++) {
             // 循环每一天
             var nowDay = new Date(year, month, i).getDay();    // 当前星期几
             if (nowDay == 0) {
@@ -54,9 +54,16 @@
               }
             }
             allDays[column].push({"day":i,"disabled":false,'lunar':"23" })
+            if (i == allDateOfNowMonth) {
+              // 处理余下的几天
+              let key = nowDay;
+              for(var j=1;key<6;j++) {
+                  key++
+                  allDays[column].push({"day":j,"disabled":true,'lunar':"23" })
+              }
+            }
           }
           this.calendarDays = allDays;
-          console.log(allDays)
         }
       },
       created() {
