@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="position:relative">
     <div v-for="item, index in imageList" :key='index' class="lazy-image-wrap">
       <img :src="defaultSrc" :data-src="item.img">
     </div>
@@ -24,20 +24,22 @@
     methods: {
       lazyload () {
         const imageListsLength = this.imageList.length
-        const img = document.getElementsByClassName('lazy-image-wrap')
+        const img = document.querySelectorAll('img')
         let n = 0
         // 可见区域高度 667
         const seeHeight = document.documentElement.clientHeight
         const scrollTop = document.documentElement.scrollTop || document.body.scrollTop
         // 滚动条距离顶部高度 起始为0 随着滚动增加慢慢增加
-        for (var i = n; i < imageListsLength; i++) {
-            if (img[i].offsetTop < seeHeight + scrollTop) {
-                if (img[i].getAttribute('src') === '../../../static/1.jpg') {
-                    img[i].src = img[i].getAttribute('data-src')
-                }
-                n = i + 1
-            }
-        }
+        setTimeout(() => {
+          for (var i = n; i < imageListsLength; i++) {
+              if (img[i].offsetTop < seeHeight + scrollTop) {
+                  if (img[i].getAttribute('src') === '../../../static/1.jpg') {
+                      img[i].src = img[i].getAttribute('data-src')
+                  }
+                  n = i + 1
+              }
+          }
+        }, 50)
       }
     },
     mounted () {

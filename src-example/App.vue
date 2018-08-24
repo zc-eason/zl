@@ -1,3 +1,9 @@
+/*
+ * @Author: mikey.zhaopeng
+ * @Date: 2018-04-28 18:33:32
+ * @Last Modified by:   mikey.zhaopeng
+ * @Last Modified time: 2018-04-28 18:33:32
+ */
 <template>
   <div id="app">
     <router-view/>

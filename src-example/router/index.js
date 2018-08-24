@@ -12,6 +12,8 @@ import mintSwipe from '@/components/mint-swipe'
 import inputExample from '@/components/wk-input-example'
 import wheel from '@/components/wheel'
 import lazyLoad from '@/components/lazyLoad'
+import range from '@/components/range'
+
 Vue.use(Router)
 const routes = [
   {
@@ -74,6 +76,11 @@ const routes = [
     path: '/zswloveljp/lazyLoad',
     name: 'lazyLoad',
     component: lazyLoad
+  },
+  {
+    path: '/zswloveljp/range',
+    name: 'range',
+    component: range
   }
 ]
 
