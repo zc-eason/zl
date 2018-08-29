@@ -11,7 +11,9 @@
           <div class="day-one" v-for="week in weeks">{{week}}</div>
         </div>
         <div class="flex-row" v-for="calendarDay in calendarDays">
-          <div class="day-one day-flex" v-for="everyDay in calendarDay" v-if="calendarDay.length>0" ><div :class="{'inline-circle':day == everyDay.day}">{{everyDay.day}}</div></div>
+          <div class="day-one day-flex" v-for="everyDay in calendarDay" v-if="calendarDay.length>0" >
+            <div :class="{'inline-circle':selected,'disable-font':everyDay.disabled}">{{everyDay.day}}</div>
+            </div>
         </div>
       </div>
     </div>
@@ -33,7 +35,8 @@
           year: 0,    // 当年
           month: 0,   // 当月
           day: 0,     // 当天
-          weeks: ['日', '一', '二', '三', '四', '五', '六']  // 星期
+          weeks: ['日', '一', '二', '三', '四', '五', '六'],  // 星期
+          selected: false
         }
       },
       methods: {
@@ -65,17 +68,17 @@
               // 第一天时, 创建第一行数组,当前周几,并补全前面的几天 29 index->0 30 index->1 31 index->2  1号 index->3  2号index->4
               allDays[column] = []
               for(var j=0;j<nowDay;j++) {
-                  allDays[column].push({"day":alllastDateOfNowMonth--,"disabled":true,'lunar':"23" })
+                  allDays[column].push({"day":alllastDateOfNowMonth--,"disabled":true,'selected':false })
               }
               allDays[column].reverse()
             }
-            allDays[column].push({"day":i,"disabled":false,'lunar':"23" })
+            allDays[column].push({"day":i,"disabled":false,'selected':false })
             if (i == allDateOfNowMonth) {
               // 处理余下的几天
               let key = nowDay;
               for(var j=1;key<6;j++) {
                   key++
-                  allDays[column].push({"day":j,"disabled":true,'lunar':"23" })
+                  allDays[column].push({"day":j,"disabled":true,'selected':false })
               }
             }
           }
@@ -97,7 +100,6 @@
             this.month = 0;
             this.year++;
           }
-          console.log(this.month)
           this.render(this.year,this.month);
         }
       },
@@ -171,6 +173,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.disable-font {
+    color: #ccc;
+    pointer-events: none!important;
+    cursor: default!important;
 }
 </style>
 
