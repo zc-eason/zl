@@ -11,7 +11,7 @@
           <div class="day-one" v-for="week in weeks">{{week}}</div>
         </div>
         <div class="flex-row" v-for="calendarDay in calendarDays">
-          <div class="day-one" v-for="everyDay in calendarDay" v-if="calendarDay.length>0">{{everyDay.day}}</div>
+          <div class="day-one day-flex" v-for="everyDay in calendarDay" v-if="calendarDay.length>0" ><div :class="{'inline-circle':day == everyDay.day}">{{everyDay.day}}</div></div>
         </div>
       </div>
     </div>
@@ -19,6 +19,14 @@
 <script>
     /* eslint-disable */
     export default {
+      props: {
+        defalutValue: {  // 默认渲染日期
+          type: Array,
+            default: function(){
+                return []
+            }
+        }
+      },
       data() {
         return {
           calendarDays: [],  // 渲染的当月日历数组
@@ -94,7 +102,13 @@
         }
       },
       created() {
-        this.render();
+        if (this.defalutValue.length>0) {
+          // 若需求有默认显示日期,显示当前年月日
+          this.year = this.defalutValue[0]
+          this.month = this.defalutValue[1];
+          this.day = this.defalutValue[2];
+        }
+        this.render(this.year,this.month);
       }
     }
 </script>
@@ -144,7 +158,19 @@
   width: 50px;
   height: 50px;
   line-height: 50px;
-  /* flex: 1; */
+  .inline-circle {
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    background: red;
+    border-radius: 50%;
+  }
+}
+.day-flex {
+  // 元素内部垂直居中
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 </style>
 

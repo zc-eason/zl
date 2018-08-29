@@ -1,6 +1,6 @@
 <template>
     <div>
-      <new-calendar></new-calendar>
+      <new-calendar :defalutValue="value"></new-calendar>
     </div>
 </template>
 <script>
@@ -9,6 +9,7 @@
     export default {
       data() {
         return {
+          value: [2018,9,11]
         }
       },
       components: {
