@@ -12,7 +12,7 @@
         </div>
         <div class="flex-row" v-for="calendarDay in calendarDays">
           <div class="day-one day-flex" v-for="everyDay in calendarDay" v-if="calendarDay.length>0" >
-            <div :class="{'inline-circle':selected,'disable-font':everyDay.disabled}">{{everyDay.day}}</div>
+            <div :class="{'inline-circle':everyDay.selected,'disable-font':everyDay.disabled}">{{everyDay.day}}</div>
             </div>
         </div>
       </div>
@@ -35,19 +35,19 @@
           year: 0,    // 当年
           month: 0,   // 当月
           day: 0,     // 当天
+          dayWeek: 0,   // 星期几
           weeks: ['日', '一', '二', '三', '四', '五', '六'],  // 星期
-          selected: false
         }
       },
       methods: {
-        render (y,m) {
+        render (y,m,d) {
           // 默认情况渲染当月日历
           let allDays = []; // 总数据
           let column = 0;  // 第一行数据
           let now = new Date();
           this.year = now.getFullYear(); // 当年
           this.month = now.getMonth();   // 当月 实际是month+1
-          this.day = now.getDate();       // 当天
+          this.dayWeek = now.getDate();       // 当天星期几
           if (y || m) {
             // 如果指定了年和月,则改变年月
             this.year = y;
@@ -72,7 +72,12 @@
               }
               allDays[column].reverse()
             }
-            allDays[column].push({"day":i,"disabled":false,'selected':false })
+            if (i == d) {
+              // 默认选中selected置为true
+              allDays[column].push({"day":i,"disabled":false,'selected':true })
+            } else {
+              allDays[column].push({"day":i,"disabled":false,'selected':false })
+            }
             if (i == allDateOfNowMonth) {
               // 处理余下的几天
               let key = nowDay;
@@ -110,7 +115,7 @@
           this.month = this.defalutValue[1];
           this.day = this.defalutValue[2];
         }
-        this.render(this.year,this.month);
+        this.render(this.year,this.month,this.day);
       }
     }
 </script>
