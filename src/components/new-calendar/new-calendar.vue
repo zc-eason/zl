@@ -72,7 +72,7 @@
               }
               allDays[column].reverse()
             }
-            if (i == d) {
+            if ((i == d) && (this.defalutValue[0]==this.year) && (this.defalutValue[1]==this.month)) {
               // 默认选中selected置为true
               allDays[column].push({"day":i,"disabled":false,'selected':true })
             } else {
@@ -96,7 +96,7 @@
             this.year--;
           }
           this.month--;
-          this.render(this.year,this.month);
+          this.render(this.year,this.month,this.day);
         },
         lastMonth() {
           // 下一个月
@@ -105,7 +105,8 @@
             this.month = 0;
             this.year++;
           }
-          this.render(this.year,this.month);
+          console.log(this.defalutValue)
+          this.render(this.year,this.month,this.day);
         }
       },
       created() {
