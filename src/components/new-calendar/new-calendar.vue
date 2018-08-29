@@ -1,5 +1,11 @@
 <template>
     <div class="new-calendar-wrapper">
+      <div class="calendar-month-wrapper">
+        <div class="calendar-month">
+          <div class="arrow-wrapper" @click="nextMonth"><span class="arrow left"></span></div>
+          {{year}}年{{month+1}}月
+          <div class="arrow-wrapper" @click="lastMonth"><span class="arrow right"></span></div></div>
+      </div>
       <div class="calendar-flex">
         <div class="flex-row">
           <div class="day-one" v-for="week in weeks">{{week}}</div>
@@ -15,31 +21,33 @@
     export default {
       data() {
         return {
-          calendarDays: [
-            [ {"day":1,"disabled":false,'lunar':"23" }, {"day":2,"disabled":false,'lunar':"23"}, {"day":3,"disabled":false,'lunar':"23"}, {"day":4,"disabled":false,'lunar':"23"} , {"day":5,"disabled":false,'lunar':"23"}, {"day":6,"disabled":false,'lunar':"23"}, {"day":0,"disabled":false,'lunar':"23"}],
-            [ {"day":1,"disabled":false,'lunar':"23" }, {"day":2,"disabled":false,'lunar':"23"}, {"day":3,"disabled":false,'lunar':"23"}, {"day":4,"disabled":false,'lunar':"23"} , {"day":5,"disabled":false,'lunar':"23"}, {"day":6,"disabled":false,'lunar':"23"}, {"day":0,"disabled":false,'lunar':"23"}],
-            [ {"day":1,"disabled":false,'lunar':"23" }, {"day":2,"disabled":false,'lunar':"23"}, {"day":3,"disabled":false,'lunar':"23"}, {"day":4,"disabled":false,'lunar':"23"} , {"day":5,"disabled":false,'lunar':"23"}, {"day":6,"disabled":false,'lunar':"23"}, {"day":0,"disabled":false,'lunar':"23"}],
-            [ {"day":1,"disabled":false,'lunar':"23" }, {"day":2,"disabled":false,'lunar':"23"}, {"day":3,"disabled":false,'lunar':"23"}, {"day":4,"disabled":false,'lunar':"23"} , {"day":5,"disabled":false,'lunar':"23"}, {"day":6,"disabled":false,'lunar':"23"}, {"day":0,"disabled":false,'lunar':"23"} ],
-            [ {"day":1,"disabled":false,'lunar':"23" }, {"day":2,"disabled":false,'lunar':"23"}, {"day":3,"disabled":false,'lunar':"23"}, {"day":4,"disabled":false,'lunar':"23"} , {"day":5,"disabled":false,'lunar':"23"}, {"day":6,"disabled":false,'lunar':"23"}, {"day":0,"disabled":false,'lunar':"23"} ],
-            [ {"day":1,"disabled":false,'lunar':"23" }, {"day":2,"disabled":false,'lunar':"23"}, {"day":3,"disabled":false,'lunar':"23"}, {"day":4,"disabled":false,'lunar':"23"} , {"day":5,"disabled":false,'lunar':"23"}, {"day":6,"disabled":false,'lunar':"23"}, {"day":0,"disabled":false,'lunar':"23"} ]
-         ],
-         weeks: ['日', '一', '二', '三', '四', '五', '六']
+          calendarDays: [],  // 渲染的当月日历数组
+          year: 0,    // 当年
+          month: 0,   // 当月
+          day: 0,     // 当天
+          weeks: ['日', '一', '二', '三', '四', '五', '六']  // 星期
         }
       },
       methods: {
-        render () {
+        render (y,m) {
+          // 默认情况渲染当月日历
           let allDays = []; // 总数据
           let column = 0;  // 第一行数据
           let now = new Date();
-          let year = now.getFullYear(); // 当前年
-          let month = now.getMonth();   // 当前月 实际是month+1
-          let day = now.getDate();       // 当前日期
-          let firstDayOfNowMonth = new Date(year, month, 1).getDay();  // 当月第一天 星期几
-          let alllastDateOfNowMonth = new Date(year, month, 0).getDate() // 上月总天数(上月最后一天日期)
-          let allDateOfNowMonth = new Date(year, month + 1, 0).getDate() // 当月总天数
+          this.year = now.getFullYear(); // 当年
+          this.month = now.getMonth();   // 当月 实际是month+1
+          this.day = now.getDate();       // 当天
+          if (y || m) {
+            // 如果指定了年和月,则改变年月
+            this.year = y;
+            this.month = m;
+          }
+          let firstDayOfNowMonth = new Date(this.year, this.month, 1).getDay();  // 当月第一天 星期几
+          let alllastDateOfNowMonth = new Date(this.year, this.month, 0).getDate() // 上月总天数(上月最后一天日期)
+          let allDateOfNowMonth = new Date(this.year, this.month + 1, 0).getDate() // 当月总天数
           for(var i=1;i<=allDateOfNowMonth;i++) {
             // 循环每一天
-            var nowDay = new Date(year, month, i).getDay();    // 当前星期几
+            var nowDay = new Date(this.year, this.month, i).getDay();    // 当前星期几
             if (nowDay == 0) {
               // 每个周末创建一个数组
               column++
@@ -64,6 +72,25 @@
             }
           }
           this.calendarDays = allDays;
+        },
+        nextMonth() {
+          // 上一个月
+          if (this.month == 0) {
+            this.month = 12;
+            this.year--;
+          }
+          this.month--;
+          this.render(this.year,this.month);
+        },
+        lastMonth() {
+          // 下一个月
+          this.month++;
+          if (this.month == 12) {
+            this.month = 0;
+            this.year++;
+          }
+          console.log(this.month)
+          this.render(this.year,this.month);
         }
       },
       created() {
@@ -71,9 +98,33 @@
       }
     }
 </script>
-<style>
-.new-calendar-wrapper{
+<style lang="less">
+.new-calendar-wrapper {
   margin-top: 50px;
+}
+.calendar-month-wrapper {
+  text-align: center;
+  line-height: 40px;
+  .arrow-wrapper{
+    display: inline-block;
+    width: 40px;
+    height: 100%;
+  }
+  .calendar-month .arrow{
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+  }
+  .calendar-month .left {
+    border-left: 1PX solid;
+    border-bottom: 1PX solid;
+    transform: rotate(45deg);
+  }
+  .calendar-month .right {
+    border-right: 1PX solid;
+    border-bottom: 1PX solid;
+    transform: rotate(-45deg);
+  }
 }
 .calendar-flex {
   width: 350px;

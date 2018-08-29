@@ -1,7 +1,7 @@
 <template>
     <div>
-        <div class="home" v-for="item in routeName">
-            <div @click="go(item)">{{item}}</div>
+        <div class="home" v-for="item in routeName" @click="go(item)" :key="item">
+            <div >{{item}}</div>
         </div>
     </div>
 </template>
