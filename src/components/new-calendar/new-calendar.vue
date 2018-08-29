@@ -41,7 +41,8 @@
           day: 0,     // 当天
           dayWeek: 0,   // 星期几
           weeks: ['日', '一', '二', '三', '四', '五', '六'],  // 星期
-          selectedValue: []  // 保留所选值day,line,i 日期/第几行/第几个 
+          selectedValue: [],  // 保留所选值day,line,i 日期/第几行/第几个 
+          clearDefalutValue: false
         }
       },
       methods: {
@@ -77,7 +78,8 @@
               }
               allDays[column].reverse()
             }
-            if ((i == d) && (this.defalutValue[0]==this.year) && (this.defalutValue[1]==this.month)) {
+            if ((i == d) && (this.defalutValue[0]==this.year) && (this.defalutValue[1]==this.month && !this.clearDefalutValue)) {
+              this.clearDefalutValue = false;
               // 默认选中selected置为true
               allDays[column].push({"day":i,"disabled":false,'selected':true })
               this.selectedValue = [i,nowDay,column]  // i 选中天数 nowDay星期几 column 第几行
@@ -104,8 +106,9 @@
           }
           this.month--;
           this.render(this.year,this.month,this.day);
-          // 将选中的日期置为空
+          // 将选中的日期置为空并清除默认选中值
           this.selectedValue = []
+          this.clearDefalutValue = true;
         },
         lastMonth() {
           // 下一个月
@@ -115,8 +118,9 @@
             this.year++;
           }
           this.render(this.year,this.month,this.day);
-          // 将选中的日期置为空
-          this.selectedValue = []
+          // 将选中的日期置为空并清除默认选中值
+          this.selectedValue = [];
+          this.clearDefalutValue = true;
         },
         selectedDay(selecteday,dayWeek,line) {
           // 修改选中样式selecteday(选中几号) dayWeek(选中星期几) line(选中第几行)
