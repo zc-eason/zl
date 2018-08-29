@@ -10,9 +10,9 @@
         <div class="flex-row">
           <div class="day-one" v-for="week in weeks">{{week}}</div>
         </div>
-        <div class="flex-row" v-for="calendarDay in calendarDays">
-          <div class="day-one day-flex" v-for="everyDay in calendarDay" v-if="calendarDay.length>0" >
-            <div :class="{'inline-circle':everyDay.selected,'disable-font':everyDay.disabled}">{{everyDay.day}}</div>
+        <div class="flex-row" v-for="calendarDay,index in calendarDays">
+          <div class="day-one day-flex" v-for="everyDay,i in calendarDay" v-if="calendarDay.length>0" >
+            <div :class="{'inline-circle':everyDay.selected,'disable-font':everyDay.disabled}" @click="selectedDay(everyDay.day,i,index)">{{everyDay.day}}</div>
             </div>
         </div>
       </div>
@@ -24,9 +24,13 @@
       props: {
         defalutValue: {  // 默认渲染日期
           type: Array,
-            default: function(){
-                return []
-            }
+          default: function(){
+              return []
+          }
+        },
+        mutified:{
+          type: Boolean, //默认单选
+          default: false
         }
       },
       data() {
@@ -37,6 +41,7 @@
           day: 0,     // 当天
           dayWeek: 0,   // 星期几
           weeks: ['日', '一', '二', '三', '四', '五', '六'],  // 星期
+          selectedValue: []  // 保留所选值day,line,i 日期/第几行/第几个 
         }
       },
       methods: {
@@ -75,6 +80,7 @@
             if ((i == d) && (this.defalutValue[0]==this.year) && (this.defalutValue[1]==this.month)) {
               // 默认选中selected置为true
               allDays[column].push({"day":i,"disabled":false,'selected':true })
+              this.selectedValue = [i,nowDay,column]  // i 选中天数 nowDay星期几 column 第几行
             } else {
               allDays[column].push({"day":i,"disabled":false,'selected':false })
             }
@@ -88,6 +94,7 @@
             }
           }
           this.calendarDays = allDays;
+          console.log(allDays)
         },
         nextMonth() {
           // 上一个月
@@ -105,8 +112,26 @@
             this.month = 0;
             this.year++;
           }
-          console.log(this.defalutValue)
           this.render(this.year,this.month,this.day);
+        },
+        selectedDay(selecteday,dayWeek,line) {
+          // 修改选中样式selecteday(选中几号) dayWeek(选中星期几) line(选中第几行)
+          if (this.mutified) {
+            // 多选
+            this.$set(this.calendarDays[line], dayWeek, {"day":selecteday,"disabled":false,'selected':true })
+          } else {
+            // 单选
+            // 0 选中天数 1 星期几 2 第几行 
+            let lastSelectedDay = this.selectedValue[0];
+            let lastSelectedDayWeek = this.selectedValue[1];
+            let lastSelectedIine = this.selectedValue[2];
+            // 将之前选中的置为不可选
+            this.$set(this.calendarDays[lastSelectedIine], lastSelectedDayWeek, {"day":lastSelectedDay,"disabled":false,'selected':false })
+            // 将点击选中的置为可选,并保留现在所选日期
+            this.$set(this.calendarDays[line], dayWeek, {"day":selecteday,"disabled":false,'selected':true })
+            this.selectedValue = [selecteday,dayWeek,line]
+            console.log(this.selectedValue)
+          }
         }
       },
       created() {
