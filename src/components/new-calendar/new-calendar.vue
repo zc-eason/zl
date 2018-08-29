@@ -104,6 +104,8 @@
           }
           this.month--;
           this.render(this.year,this.month,this.day);
+          // 将选中的日期置为空
+          this.selectedValue = []
         },
         lastMonth() {
           // 下一个月
@@ -113,6 +115,8 @@
             this.year++;
           }
           this.render(this.year,this.month,this.day);
+          // 将选中的日期置为空
+          this.selectedValue = []
         },
         selectedDay(selecteday,dayWeek,line) {
           // 修改选中样式selecteday(选中几号) dayWeek(选中星期几) line(选中第几行)
@@ -126,7 +130,9 @@
             let lastSelectedDayWeek = this.selectedValue[1];
             let lastSelectedIine = this.selectedValue[2];
             // 将之前选中的置为不可选
-            this.$set(this.calendarDays[lastSelectedIine], lastSelectedDayWeek, {"day":lastSelectedDay,"disabled":false,'selected':false })
+            if (lastSelectedDay&&lastSelectedDayWeek&&lastSelectedIine) {
+              this.$set(this.calendarDays[lastSelectedIine], lastSelectedDayWeek, {"day":lastSelectedDay,"disabled":false,'selected':false })
+            }
             // 将点击选中的置为可选,并保留现在所选日期
             this.$set(this.calendarDays[line], dayWeek, {"day":selecteday,"disabled":false,'selected':true })
             this.selectedValue = [selecteday,dayWeek,line]
