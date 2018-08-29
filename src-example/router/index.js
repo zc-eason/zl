@@ -35,7 +35,7 @@ const routes = [
   },
   {
     path: '/zswloveljp/calendar',
-    name: '/zswloveljpcalendar',
+    name: 'calendar',
     component: Calendar
   },
   {

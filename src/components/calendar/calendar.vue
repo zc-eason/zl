@@ -203,7 +203,7 @@ export default {
                     this.rangeEnd = [year2, month2 , day2]
                 }else if(this.multi){//多选
                     this.multiDays=this.value;
-                }else{
+                }else {
                     this.year = parseInt(this.value[0])
                     this.month = parseInt(this.value[1]) - 1
                     this.day = parseInt(this.value[2])
