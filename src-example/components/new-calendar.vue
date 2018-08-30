@@ -9,7 +9,7 @@
     export default {
       data() {
         return {
-          value: [2018,9,11],  // 默认选中日期
+          value: [],  // 默认选中日期
           mutified: false       // 默认单选
         }
       },

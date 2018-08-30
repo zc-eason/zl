@@ -51,9 +51,12 @@
           let allDays = []; // 总数据
           let column = 0;  // 第一行数据
           let now = new Date();
-          this.year = now.getFullYear(); // 当年
-          this.month = now.getMonth();   // 当月 实际是month+1
-          this.dayWeek = now.getDate();       // 当天星期几
+          let thisYear;
+          let thisMonth;
+          let thisDay;
+          thisYear = this.year = now.getFullYear(); // 当年
+          thisMonth = this.month = now.getMonth();   // 当月 实际是month+1
+          thisDay = this.day = now.getDate();       // 当天几号
           if (y || m) {
             // 如果指定了年和月,则改变年月
             this.year = y;
@@ -78,14 +81,26 @@
               }
               allDays[column].reverse()
             }
-            if ((i == d) && (this.defalutValue[0]==this.year) && (this.defalutValue[1]==this.month && !this.clearDefalutValue)) {
-              // this.clearDefalutValue = false;
-              // 默认选中selected置为true
-              allDays[column].push({"day":i,"disabled":false,'selected':true })
-              this.selectedValue = [i,nowDay,column]  // i 选中天数 nowDay星期几 column 第几行
+            if(this.defalutValue.length>0) {
+              if ((i == d) && (this.defalutValue[0]==this.year) && (this.defalutValue[1]==this.month)) {
+                // this.clearDefalutValue = false;
+                // 默认选中selected置为true
+                allDays[column].push({"day":i,"disabled":false,'selected':true })
+                this.selectedValue = [i,nowDay,column]  // i 选中天数 nowDay星期几 column 第几行
+              } else {
+                allDays[column].push({"day":i,"disabled":false,'selected':false })
+              }
             } else {
-              allDays[column].push({"day":i,"disabled":false,'selected':false })
+              if (i == this.day && (thisYear ==this.year) && (thisMonth==this.month)) {
+                // this.clearDefalutValue = false;
+                // 默认选中selected置为true
+                allDays[column].push({"day":i,"disabled":false,'selected':true })
+                this.selectedValue = [i,nowDay,column]  // i 选中天数 nowDay星期几 column 第几行
+              } else {
+                allDays[column].push({"day":i,"disabled":false,'selected':false })
+              }
             }
+
             if (i == allDateOfNowMonth) {
               // 处理余下的几天
               let key = nowDay;
