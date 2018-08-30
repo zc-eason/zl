@@ -41,7 +41,7 @@
           day: 0,     // 当天
           dayWeek: 0,   // 星期几
           weeks: ['日', '一', '二', '三', '四', '五', '六'],  // 星期
-          selectedValue: [],  // 保留所选值day,line,i 日期/第几行/第几个 
+          selectedValue: [],  // 保留所选值day,line,i 日期/第几行/第几个
           clearDefalutValue: false
         }
       },
@@ -100,26 +100,26 @@
         },
         nextMonth() {
           // 上一个月
+          // 将选中的日期置为空并清除默认选中值
+          this.selectedValue = []
           if (this.month == 0) {
             this.month = 12;
             this.year--;
           }
           this.month--;
           this.render(this.year,this.month,this.day);
-          // 将选中的日期置为空并清除默认选中值
-          this.selectedValue = []
           // this.clearDefalutValue = true;
         },
         lastMonth() {
           // 下一个月
+          // 将选中的日期置为空并清除默认选中值
+          this.selectedValue = [];
           this.month++;
           if (this.month == 12) {
             this.month = 0;
             this.year++;
           }
           this.render(this.year,this.month,this.day);
-          // 将选中的日期置为空并清除默认选中值
-          this.selectedValue = [];
           // this.clearDefalutValue = true;
         },
         selectedDay(selecteday,dayWeek,line) {
@@ -129,7 +129,7 @@
             this.$set(this.calendarDays[line], dayWeek, {"day":selecteday,"disabled":false,'selected':true })
           } else {
             // 单选
-            // 0 选中天数 1 星期几 2 第几行 
+            // 0 选中天数 1 星期几 2 第几行
             let lastSelectedDay = this.selectedValue[0];
             let lastSelectedDayWeek = this.selectedValue[1];
             let lastSelectedIine = this.selectedValue[2];
