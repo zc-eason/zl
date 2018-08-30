@@ -9,7 +9,7 @@
     export default {
       data() {
         return {
-          value: [],  // 默认选中日期
+          value: [2018,8,16],  // 默认选中日期 当前月加一 才是真正的日期
           mutified: false,       // 默认单选
           begin: [2018,5,16], //可选开始日期
           end: [2018,10,16], //可选结束日期

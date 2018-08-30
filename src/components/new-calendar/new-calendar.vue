@@ -100,8 +100,17 @@
                 allDays[column].push({"day":i,"disabled":false,'selected':true })
                 this.selectedValue = [i,nowDay,column]  // i 选中天数 nowDay星期几 column 第几行
               } else {
-                //普通日期
-                allDays[column].push({"day":i,"disabled":false,'selected':false })
+                // 普通日期
+                let options = {"day":i,"disabled":false,'selected':false }
+                if (this.begin.length>0) {
+                    let beginTime = Number(new Date(parseInt(this.begin[0]),parseInt(this.begin[1]) - 1,parseInt(this.begin[2])))
+                    if (beginTime > Number(new Date(this.year, this.month, i))) options.disabled = true
+                }
+                if (this.end.length>0){
+                    let endTime = Number(new Date(parseInt(this.end[0]),parseInt(this.end[1]) - 1,parseInt(this.end[2])))
+                    if (endTime <  Number(new Date(this.year, this.month, i))) options.disabled = true
+                }
+                allDays[column].push(options)
               }
             } else {
               if (i == this.day && (thisYear ==this.year) && (thisMonth==this.month)) {
