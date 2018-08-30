@@ -201,6 +201,8 @@ export default {
 
                     this.rangeBegin = [this.year, this.month,this.day]
                     this.rangeEnd = [year2, month2 , day2]
+                    console.log([this.year, this.month,this.day])
+                    console.log([year2, month2 , day2])
                 }else if(this.multi){//多选
                     this.multiDays=this.value;
                 }else {
@@ -308,7 +310,7 @@ export default {
                             this.getEvents(this.year,this.month+1,i),
                         ))
                         this.today = [line, temp[line].length - 1]
-                    }else{
+                    }else {
                         // 普通日期
                         // console.log("设置可选范围",i,lunarYear,lunarMonth,lunarValue,lunarInfo)
                         let options = Object.assign(
@@ -360,7 +362,6 @@ export default {
             //     }
             // }
             this.days = temp
-            console.log(this.days)
         },
         computedPrevYear(){
             let value=this.year
