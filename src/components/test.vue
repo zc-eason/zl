@@ -10,6 +10,7 @@
 export default {
   data () {
     return {
+      a: '',
       p: {a: 1},
       arr: [{ 'name': 'jaj' }, { 'age': 12 }, { 'school': 'high' }],
       temperature: [ 14, false, 15 ]

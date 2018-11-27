@@ -21,6 +21,7 @@
 <style lang="less">
   .toast-bis-style{
      width: 200px;
+     
     position:absolute;
     left: 50%;
     top: 50%;
